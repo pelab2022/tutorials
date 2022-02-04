@@ -1,7 +1,10 @@
 # tutorials
 HP作成のチュートリアル。各項目の詳細な資料は、要望があれば作るかも？
 
-### HP係の仕事
+## HP係の仕事
+基本的には、新b3のHP係を中心に活動します。
+### webページの実装
+以下のページを、デザイン班から受け取ったイメージ通りに実装します。
 - メインページの作成。
   - メインページは、ブラウザ(フロントエンド)完結にします。サーバ側(バックエンド)での処理は、サーバスペック的に厳しいです。他のページも同様。
 - 各展示の紹介ページ作成。
@@ -13,28 +16,68 @@ HP作成のチュートリアル。各項目の詳細な資料は、要望があ
     - 各企画ページにある合言葉を企画ページで入力すると、スタンプが押される仕様。
   - そのような企画が特になければ、必要ないです。
 
-注意として、去年(2021)のwebページはNext.js(後述)を用いて作られており、ソースがとても読めたものではないです。
-参考にする場合は、[コンパイル前のコード](https://github.com/pelab2021/2021hp_next)か、2020以前のページを見ましょう。
-- [2021年のコード](https://github.com/pelab2021/2021hp_next)は非公開設定になっています。見たい場合は要望があれば2021年のグループに追加します。
+#### 参考：過去のページについて
+##### 一昨年(2020)まで
+HPは生html/css/jsだけで書かれていて、新b3のHP担当2、3人が担当していていました。
+- [2016年度](https://www.pemayfes.t.u-tokyo.ac.jp/2016)
+- [2017年度](https://www.pemayfes.t.u-tokyo.ac.jp/2017)
+- [2018年度](https://www.pemayfes.t.u-tokyo.ac.jp/2018)
+- [2019年度](https://www.pemayfes.t.u-tokyo.ac.jp/2019)
+- [2020年度](https://www.pemayfes.t.u-tokyo.ac.jp/2020)
 
-## HTML/CSS/JavaScript
+##### 去年(2021)
+オンライン対応、スマホ対応でUIを充実させるため、Next.jsというフレームワークを使いました。
+コードは複雑化していますが、基本構成は一昨年までと変わりません。
+不要な部分を消した骨組みをgitで共有する予定で、これをベースにすると楽に作れるはずです。
+
+注意として、コンパイルによりHTML/CSS/JSのコードを生成する仕様上、ブラウザに送られてくるソースはとても読めたものではないです。
+参考にする場合は、[コンパイル前のコード](https://github.com/pelab2021/2021hp_next)か、2020以前のページを見ましょう。
+- [2021年のコード](https://github.com/pelab2021/2021hp_next)は非公開設定になっています。すぐに見たい場合は要望があれば2021年のグループに追加します。
+
+### サーバ管理
+webparkという東大で借りている共有サーバを使います。
+実体は[さくらのレンタルサーバ](https://rs.sakura.ad.jp/)で、[コントロールパネル](https://secure.sakura.ad.jp/rs/cp/)内のファイルマネージャから操作できます。
+ドメイン名とパスワードは別途共有します。
+
+#### ディレクトリ構成
+WindowsやMacにおけるフォルダのことを、サーバのOS(などのLinux系OS)ではディレクトリと呼びます。
+説明は現在執筆中...
+.<br/>
+├── .htaccess<br/>
+├── .htpasswd<br/>
+├── index.html->20xx/.../index.html<br/>
+├── 201x : 201x年度のディレクトリ。<br/>
+├── 2020 : 2020年度のディレクトリ。<br/>
+└── 2021 : 2021年度のディレクトリ。パソコン版(/pc)とスマホ版(/sp)に分かれています。<br/>
+　　├── pc<br/>
+　　└── sp<br/>
+
+#### advanced: 
+現在執筆中...
+#### advanced: 一括アップロード
+現在執筆中...
+ファイルのアップロードはできますが、フォルダのアップロードはコントロールパネルからはできません。
+
+## 勉強してほしいこと
+"*" 付きは必須事項。
+### HTML/CSS/JavaScript*
 フロントエンド(=ブラウザ側)アプリケーション開発の基本。
 極論、HTML/CSSだけでもウェブサイトは作れる...が、UIを作るにはJavaScriptが必要。
 拡張子は、
 - HTML：.html(.htm)
 - CSS：.css
 - JavaScript：.js
-### 参考資料
+#### 参考資料
 - https://developer.mozilla.org/ja/docs/Learn/Front-end_web_developer
 
-## [TypeScript](https://www.typescriptlang.org/)
+### [TypeScript](https://www.typescriptlang.org/)
 JavaScriptに静的に型を付けたもの。
 型推論が優秀で、JavaScriptのコードがそのままコンパイル可能。そのため、細かい型の指定法などは勉強しなくてもOK。
 VScodeの補完などが使えるようになるため、使うのが推奨。
 型の明示的な指定は必須ではないが、バグ防止のため、函数の引数や複雑なオブジェクトには明示的につけるとよい。
 拡張子は".tx"。
 
-## [React](https://ja.reactjs.org/)
+### [React](https://ja.reactjs.org/)
 フロントエンド開発のためのJavaScriptのライブラリ。
 JSXというhtmlっぽい記法で書かれたhtmlオブジェクトを返す函数として各コンポーネントを記述する。
 html,css,JavaScript全てをJavaScript上で書くことになるため、ある程度JSになれていないと難しいかも。
@@ -43,14 +86,14 @@ html,css,JavaScript全てをJavaScript上で書くことになるため、ある
 公式チュートリアルが分かりやすい。<br/>
 要望があれば資料作るかも？
 
-## [Next.js](https://nextjs.org/)
+### [Next.js](https://nextjs.org/)
 Reactのフレームワーク(更に使いやすくしたもの)。
 Reactが使えれば、追加で必要な知識はあまりない。
 
-## [Material-UI](https://mui.com/)
+### [Material-UI](https://mui.com/)
 去年使ったReact用のCSSフレームワーク。ボタンやサイドバーなど、頻繁に使うコンポーネントが大体揃ってる。
 
 CSSフレームワークは他にもいろいろあるので、デザイン係の人と話して検討するといいかも？
 
-## [styled-component](https://styled-components.com/)
+### [styled-component](https://styled-components.com/)
 コンポーネントの装飾が楽にできる(CSSで書ける)。
